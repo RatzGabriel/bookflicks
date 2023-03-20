@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { links } from '../utils/constants';
+import { links } from '../../utils/constants';
 
 const Dropdown = ({ color }) => {
 	const [isOpen, setIsOpen] = useState(false);

@@ -96,6 +96,14 @@ npm install
 - [ ] Adapt Design + Colors
 - [ ] Implement React Memo for stored books
 - [ ] Implement Typescript
+- [ ] Create Sites for single books
+- [ ] Feedback after clicking add to Favorits
+- [ ] Filter Feature
+- [ ] Add React Memo for Landing Page
+- [ ] Add Shimmer for Title Cards
+- [ ] Close Mobile Menu when click beside it
+- [ ] Fetch more results
+- [ ] Feature: Let user add his own api key
 
 See the [open issues](https://github.com/RatzGabriel/bookflix/issues) for a full list of proposed features (and known issues).
 

@@ -2,15 +2,15 @@ import React, { lazy, Suspense } from 'react';
 import ReactDom from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
-import Body from './components/Body';
-import Error from './components/Error';
-import Footer from './components/Footer';
-import Header from './components/Header';
+import Home from './pages/Home/index';
+import Error from './components/ui/Error';
+import Footer from './components/ui/Footer';
+import Header from './components/ui/Header';
 import store from './utils/store';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { Shimmer } from './components/Shimmer';
-import Favorites from './components/Favorites';
+import { Shimmer } from './components/ui/Shimmer';
+import Favorites from './pages/Favorites/index';
 
 const AppLayout = () => {
 	return (
@@ -34,7 +34,7 @@ const appRouter = createBrowserRouter([
 		children: [
 			{
 				path: '/',
-				element: <Body />,
+				element: <Home />,
 			},
 			{
 				path: '/favorites',

@@ -51,7 +51,7 @@ const Header = () => {
 						}  text-3xl font-bold`}
 						to="/favorites"
 					>
-						Favorites ({books.length})
+						Favorites <span data-testid="booklength">{books.length}</span>
 					</Link>
 				</div>
 			</div>

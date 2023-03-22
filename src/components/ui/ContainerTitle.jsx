@@ -18,7 +18,7 @@ const ContainerTitle = ({ books, title, isSearchResult, row }) => {
 		return <TopBookContainer topBooks={topBooks} />;
 	} else {
 		return (
-			<div className="max-h-50 pt-24">
+			<div className="max-h-50 pt-24" data-testid="container-title">
 				<h1 className={titleClass}>
 					{isSearchResult ? 'SearchResults' : title}
 				</h1>

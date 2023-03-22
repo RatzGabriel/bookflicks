@@ -8,7 +8,11 @@ const BigContainer = () => {
 			className="flex py-11 md:my-12 w-full flex-col items-center"
 			data-testid="big-container"
 		>
-			<img className="w-3/6 hidden md:block " src={LANDINGPAGE_IMAGE} />
+			<img
+				className="w-3/6 hidden md:block "
+				data-testid="image"
+				src={LANDINGPAGE_IMAGE}
+			/>
 			<Search />
 		</div>
 	);

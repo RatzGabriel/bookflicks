@@ -17,13 +17,13 @@ global.fetch = jest.fn(() => {
 });
 
 test('Search Results on Homepage', () => {
-	// const searchDiv = render(
-	// 	<StaticRouter>
-	// 		<Provider store={store}>
-	// 			<Search />
-	// 		</Provider>
-	// 	</StaticRouter>
-	// );
-	// const search = searchDiv.getByTestId('searchinput');
-	// expect(search).toBeInTheDocument();
+	const searchDiv = render(
+		<StaticRouter>
+			<Provider store={store}>
+				<Search />
+			</Provider>
+		</StaticRouter>
+	);
+	const search = searchDiv.getByTestId('searchinput');
+	expect(search).toBeInTheDocument();
 });

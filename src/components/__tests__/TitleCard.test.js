@@ -13,15 +13,15 @@ import TitleCard from '../../components/ui/TitleCard';
 import '@testing-library/jest-dom';
 
 test('test if Title Card is rendered', () => {
-	// const titleCard = render(
-	// 	<StaticRouter>
-	// 		<Provider store={store}>
-	// 			<TitleCard book={mockbook} />
-	// 		</Provider>
-	// 	</StaticRouter>
-	// );
-	// const image = titleCard.getByTestId('imageid');
-	// fireEvent.mouseEnter(image);
-	// const modalDiv = titleCard.getByTestId('mouseEnter');
-	// expect(modalDiv).toBeInTheDocument();
+	const titleCard = render(
+		<StaticRouter>
+			<Provider store={store}>
+				<TitleCard book={mockbook} />
+			</Provider>
+		</StaticRouter>
+	);
+	const image = titleCard.getByTestId('imageid');
+	fireEvent.mouseEnter(image);
+	const modalDiv = titleCard.getByTestId('mouseEnter');
+	expect(modalDiv).toBeInTheDocument();
 });

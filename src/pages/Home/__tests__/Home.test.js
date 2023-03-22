@@ -1,55 +1,46 @@
 import { render, waitFor, screen } from '@testing-library/react';
 import { Provider, useSelector } from 'react-redux';
 import { StaticRouter } from 'react-router-dom/server';
-import Home from '../../../pages/Home/index';
+import Home from '../../Home/index';
 import '@testing-library/jest-dom';
 import store from '../../../utils/store';
-import { BOOK_DATA } from '../../../data/mocks/data';
+import getBooks from '../../../utils/getBooks';
+import { loadAllBooks } from '../../Home/loadAllBooks';
+import { mockBOOK_DATA } from '../../../data/mocks/data.js';
 
-// Mock the useSelector hook
 jest.mock('react-redux', () => ({
 	...jest.requireActual('react-redux'),
 	useSelector: jest.fn(),
 }));
 
-global.fetch = jest.fn(() => {
-	return Promise.resolve({
-		//Mock data layer
-		json: () => {
-			return Promise.resolve(BOOK_DATA);
-		},
+jest.mock('../../../utils/getBooks', () => {
+	return {
+		default: jest.fn(),
+
+		all: jest.fn(() => Promise.resolve(mockBOOK_DATA.allBooks.all)),
+
+		fantasy: jest.fn(() => Promise.resolve(mockBOOK_DATA.allBooks.fantasy)),
+
+		comedy: jest.fn(() => Promise.resolve(mockBOOK_DATA.allBooks.comedy)),
+
+		crime: jest.fn(() => Promise.resolve(mockBOOK_DATA.allBooks.crime)),
+	};
+});
+
+describe('Body component', () => {
+	useSelector.mockReturnValue(mockBOOK_DATA);
+	it('should render the Body component', async () => {
+		async () => {
+			const body = render(
+				<Provider store={store}>
+					<StaticRouter>
+						<Home />
+					</StaticRouter>
+				</Provider>
+			);
+			await waitFor(() => body.getByTestId('homeComponent'));
+			const homeComponent = body.getByTestId('homeComponent');
+			expect(homeComponent).toBeInTheDocument();
+		};
 	});
 });
-
-test('Render Home', async () => {
-	// Set up the mock selector to return some test data
-	// useSelector.mockReturnValue(BOOK_DATA);
-	const body = render(
-		<StaticRouter>
-			<Provider store={store}>
-				<Home />
-			</Provider>
-		</StaticRouter>
-	);
-	await waitFor(() => screen.getByTestId('homeComponent'));
-	const homeComponent = body.getByTestId('homeComponent');
-	expect(homeComponent).toBeInTheDocument();
-});
-
-// jest.mock('../../../utils/', () => {
-// 	return {
-// 		getBooks: jest.fn().mockRejectedValue(new Error('Failed to fetch books')),
-// 	};
-// });
-// test('fetching books throws error', async () => {
-// 	const errorMock = jest.fn(); // Create a mock function for console.error
-// 	console.error = errorMock; // Set the console.error function to the mock function
-// 	render(
-// 		<StaticRouter>
-// 			<Provider store={store}>
-// 				<Home />
-// 			</Provider>
-// 		</StaticRouter>
-// 	);
-// 	expect(errorMock).toHaveBeenCalledWith('Failed to fetch books');
-// });

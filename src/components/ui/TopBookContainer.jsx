@@ -1,5 +1,6 @@
 import React from 'react';
 import Slider from 'react-slick';
+import { uid } from 'uid';
 import { titleClass } from '../../assets/tailwindStyles';
 import {
 	settingsSlide,
@@ -21,7 +22,7 @@ const TopBookContainer = ({ topBooks }) => {
 				<Slider {...topSlider} className=" md:hidden">
 					{topBooks.books.map((book, index) => {
 						return (
-							<div className=" flex mx-1">
+							<div className=" flex mx-1" key={uid()}>
 								<div className="w-[8.5rem] h-40 md:w-20 ">{getRank(index)}</div>
 								<TitleCard book={book} test={'test'} />
 							</div>

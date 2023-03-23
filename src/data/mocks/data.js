@@ -1,6 +1,6 @@
 export const mockBOOK_DATA = {
-	allBooks: {
-		all: [
+	all: {
+		items: [
 			{
 				kind: 'books#volume',
 				id: 'zYw3sYFtz9kC',
@@ -3576,7 +3576,9 @@ export const mockBOOK_DATA = {
 				},
 			},
 		],
-		fantasy: [
+	},
+	fantasy: {
+		items: [
 			{
 				kind: 'books#volume',
 				id: '2VCDEAAAQBAJ',
@@ -7254,7 +7256,9 @@ export const mockBOOK_DATA = {
 				},
 			},
 		],
-		comedy: [
+	},
+	comedy: {
+		items: [
 			{
 				kind: 'books#volume',
 				id: '8r6SdfcZC7YC',
@@ -10657,7 +10661,9 @@ export const mockBOOK_DATA = {
 				},
 			},
 		],
-		crimeBooks: [
+	},
+	crimeBooks: {
+		items: [
 			{
 				kind: 'books#volume',
 				id: 'QXdJCAAAQBAJ',
@@ -13888,6 +13894,5 @@ export const mockBOOK_DATA = {
 				},
 			},
 		],
-		crime: [],
 	},
 };

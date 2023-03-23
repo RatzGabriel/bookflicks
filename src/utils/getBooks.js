@@ -13,7 +13,9 @@ const getBooks = async (genre, dispatch, books) => {
 			`https://www.googleapis.com/books/v1/volumes?maxResults=40&q=${genreSearch}&key=${process.env.GOOGLE_KEY}`
 		);
 		json = await data.json();
+
 		if (json.items == undefined) return;
+		console.log(json.items.length);
 		dispatch(
 			addBooks({
 				searchQuery: genre,

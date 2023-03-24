@@ -18,11 +18,11 @@ const ContainerTitle = ({ books, title, isSearchResult, row }) => {
 		return <TopBookContainer topBooks={topBooks} />;
 	} else {
 		return (
-			<div className="max-h-50 pt-24" data-testid="container-title">
-				<h1 className={titleClass}>
-					{isSearchResult ? 'SearchResults' : title}
-				</h1>
+			<div className="max-h-50 pt-24 md:" data-testid="container-title">
 				<div className="md:hidden">
+					<h1 className={titleClass}>
+						{isSearchResult ? 'SearchResults' : title}
+					</h1>
 					<Slider
 						className={` max-h-60 md:hidden ${isSearchResult && 'w-72'}  `}
 						{...(isSearchResult ? searchSlide : settingsSlide)}
@@ -34,15 +34,19 @@ const ContainerTitle = ({ books, title, isSearchResult, row }) => {
 					</Slider>
 				</div>
 
-				<div
-					className={` ${
-						title == 'Favorites' ? '' : 'justify-between'
-					}  hidden md:flex ${isSearchResult && 'flex-wrap'} `}
-				>
-					{books &&
-						books.map((book, index) => {
-							if (index < 10) return <TitleCard key={book.id} book={book} />;
-						})}
+				<div className="hidden md:flex">
+					<div className="mx-auto  py-4 w-full">
+						<h2 className="text-2xl font-bold tracking-tight text-white-900">
+							{title}
+						</h2>
+						<div className="mt-1 grid grid-cols-1 gap-y-5 gap-x-6 sm:grid-cols-2 lg:grid-cols-9 xl:gap-x-8">
+							{books &&
+								books.map((book, index) => {
+									if (index < 16)
+										return <TitleCard key={book.id} book={book} />;
+								})}
+						</div>
+					</div>
 				</div>
 			</div>
 		);

@@ -45,19 +45,21 @@ function Search() {
 				ref={inputReference}
 				type="text"
 				data-testid="searchinput"
-				className=" w-full md:w-2/3   border-white bg-black text-white my-10  p-2 md:p-10 rounded  md:rounded-full border-2 text-sm md:text-3xl font-bold flex "
+				className="   border-white bg-black text-white my-10  p-2 md:p-10 rounded  md:rounded-full border-2 text-sm md:text-3xl font-bold flex "
 				placeholder="Search for Books or categories"
 				{...searchText}
 			/>
 
 			{searchBooks.length > 0 ? (
-				<ContainerTitle
-					text={searchText.value}
-					books={searchBooks}
-					isSearchResult
-					title={searchText.value}
-					length={all}
-				/>
+				<div className="w-full">
+					<ContainerTitle
+						text={searchText.value}
+						books={searchBooks}
+						isSearchResult
+						title={searchText.value}
+						length={all}
+					/>
+				</div>
 			) : null}
 		</>
 	);

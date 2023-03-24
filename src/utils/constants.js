@@ -111,7 +111,7 @@ export const RANK_FIVE = (
 
 //Settings
 export const settingsSlide = {
-	dots: true,
+	dots: false,
 	infinite: true,
 	speed: 500,
 	slidesToShow: 2,

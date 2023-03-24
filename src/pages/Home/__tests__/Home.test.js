@@ -10,6 +10,11 @@ import {
 	CONTAINER_TITLE_2,
 	CONTAINER_TITLE_3,
 } from '../../../utils/constants';
+import favoritesSlice, {
+	addToFavorites,
+	clearFavorites,
+	loadFavorites,
+} from '../../../utils/favoritesSlice';
 
 global.fetch = jest
 	.fn()
@@ -79,4 +84,62 @@ it('should render the ContainerTitle component with the correct books and title'
 		expect(containerTitles[2]).toHaveAttribute('books', JSON.stringify(crime));
 		expect(containerTitles[2]).toHaveAttribute('title', CONTAINER_TITLE_3);
 	};
+});
+
+describe('loadFavorites', () => {
+	it('returns an empty array if there are no favorites stored in localStorage', async () => {
+		localStorage.clear();
+
+		const result = await loadFavorites();
+
+		expect(result).toEqual([]);
+	});
+
+	it('returns an array of favorites stored in localStorage', async () => {
+		const mockFavorites = [
+			{ id: 1, title: 'Mock Book 1' },
+			{ id: 2, title: 'Mock Book 2' },
+		];
+		localStorage.setItem('favorites', JSON.stringify(mockFavorites));
+
+		const result = await loadFavorites();
+
+		expect(result).toEqual(mockFavorites);
+	});
+});
+
+describe('favoritesSlice reducers', () => {
+	describe('clearFavorites', () => {
+		it('clears the favorites array in the state and localStorage', () => {
+			const state = {
+				items: [
+					{ id: 1, title: 'Mock Book 1' },
+					{ id: 2, title: 'Mock Book 2' },
+				],
+			};
+			localStorage.setItem('favorites', JSON.stringify(state.items));
+			const action = clearFavorites();
+
+			const result = favoritesSlice(state, action);
+
+			expect(result.items).toEqual([]);
+			expect(JSON.parse(localStorage.getItem('favorites'))).toEqual([]);
+		});
+	});
+
+	it('adds a new book to the favorites array in the state and localStorage', () => {
+		const state = {
+			items: [{ id: 1, title: 'Mock Book 1' }],
+		};
+		localStorage.setItem('favorites', JSON.stringify(state.items));
+		const newBook = { id: 2, title: 'Mock Book 2' };
+		const action = addToFavorites(newBook);
+
+		const result = favoritesSlice(state, action);
+
+		expect(result.items).toContainEqual(newBook);
+		expect(JSON.parse(localStorage.getItem('favorites'))).toContainEqual(
+			newBook
+		);
+	});
 });

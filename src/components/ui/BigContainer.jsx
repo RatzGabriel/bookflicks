@@ -4,10 +4,7 @@ import Search from './Search';
 
 const BigContainer = () => {
 	return (
-		<div
-			className="flex py-11 md:my-12 w-full flex-col items-center"
-			data-testid="big-container"
-		>
+		<div className="flex pt-11 md:mt-12 w-full flex-col items-center ">
 			<img
 				className="w-3/6 hidden md:block "
 				data-testid="image"

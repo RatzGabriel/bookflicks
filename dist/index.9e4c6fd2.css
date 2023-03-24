@@ -1,6 +1,6 @@
 *, :before, :after {
   box-sizing: border-box;
-  border: 0 solid #e5e7eb;
+  border: 0 solid;
 }
 
 :before, :after {
@@ -286,11 +286,6 @@ img, video {
 
 .justify-between {
   justify-content: space-between !important;
-}
-
-.bg-black {
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity)) !important;
 }
 
 .text-3xl {

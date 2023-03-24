@@ -5,6 +5,7 @@ import {
 	removeFromFavorites,
 } from '../../utils/favoritesSlice';
 import { PLACEHOLDER_COVER } from '../../utils/constants';
+import Modal from './Modal';
 
 const TitleCard = ({ book, test, key }) => {
 	const [modal, setModal] = useState(false);
@@ -21,7 +22,7 @@ const TitleCard = ({ book, test, key }) => {
 		publishedDate,
 		ratingsCount,
 	} = book.volumeInfo;
-
+	const imagesrc = imageLinks?.smallThumbnail || PLACEHOLDER_COVER;
 	const addBookHandler = () => {
 		if (!isBookInFavorites) {
 			dispatch(addToFavorites(book));
@@ -30,129 +31,29 @@ const TitleCard = ({ book, test, key }) => {
 		dispatch(removeFromFavorites(book));
 	};
 
+	const setOpen = (openState) => {
+		console.log('check');
+		setModal(openState);
+	};
+
 	const modalStyle = {
 		display: modal ? 'none' : 'flex',
 	};
 
 	return (
-		<div
-			key={key}
-			onMouseEnter={() => setDesktopModal(true)}
-			className="modal ? 'h-40' : ' m-3 "
-		>
-			{imageLinks?.thumbnail ? (
-				imageLinks.thumbnail && (
-					<img
-						data-testid="imageid"
-						onClick={() => setModal(true)}
-						className={`h-40 w-36`}
-						src={imageLinks.thumbnail}
-						alt="image of thumbnail"
-						style={modalStyle}
-					/>
-				)
-			) : (
-				<>
-					<img
-						data-testid="imageid"
-						onClick={() => setModal(true)}
-						className={`h-20 w-36`}
-						src={PLACEHOLDER_COVER}
-						alt="image of thumbnail"
-						style={modalStyle}
-					/>
-					<p style={modalStyle}>{title}</p>
-				</>
-			)}
-
+		<div key={book.id} href={book.id} className="group">
 			<div
-				onMouseLeave={() => setDesktopModal(false)}
-				data-testid="mouseEnter"
-				className={` pointer-events-none md:pointer-events-auto  w-auto z-50 absolute -translate-x-16 -translate-y-40 rounded  flex-col p-5 opacity-0 transition-opacity duration-300 hover:opacity-100  h-25 bg-white text-black ${
-					desktopModal ? 'flex' : 'hidden '
-				}`}
-				onAnimationEnd={(e) =>
-					e.animationName === 'fadeIn' && (e.target.style.opacity = 1)
-				}
-				style={{ animation: 'fadeIn 300ms forwards' }}
+				onClick={() => setOpen(true)}
+				className="h-[15rem] aspect-w-1 aspect-h-1  overflow-hidden rounded-lg bg-gray-200 xl:aspect-w-7 xl:aspect-h-8"
 			>
-				{
-					<img
-						className={`h-40 w-36 ${modal ? 'hidden  ' : 'flex '} `}
-						src={
-							imageLinks?.thumbnail ? imageLinks.thumbnail : PLACEHOLDER_COVER
-						}
-					/>
-				}
-				<div>
-					<p className="font-bold w-32 text-red-300">
-						{title.length > 30 ? `${title.slice(0, 20)}...` : title}
-					</p>
-					<p>By: {authors && <span>{authors[0]}</span>}</p>
-					{averageRating && <p>Rating: {averageRating}</p>}
-					{pageCount && <p>Pages: {pageCount}</p>}
-					{publishedDate && <p>publishedDate: {publishedDate}</p>}
-					{ratingsCount && <p>ratingsCount: {ratingsCount}</p>}
-					<button
-						type="button"
-						className={`${isBookInFavorites ? 'bg-red-500' : 'bg-white my-5'}
-							  hover:${
-									isBookInFavorites ? 'bg-red-500' : 'bg-green-300'
-								} text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow`}
-						onClick={() => addBookHandler()}
-					>
-						{isBookInFavorites ? `Remove from Favorites` : 'Add to Favorites'}
-					</button>
-				</div>
+				<img
+					src={imagesrc}
+					alt={title}
+					className="h-full w-full object-cover object-center group-hover:opacity-75"
+				/>
 			</div>
-
-			<div
-				onClick={() => setModal(false)}
-				className={`h-40 w-36  ${
-					modal
-						? `flex flex-col items-center justify-around border border-white `
-						: 'hidden border '
-				} `}
-			>
-				<button
-					onClick={() => addBookHandler(book)}
-					className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded "
-				>
-					{isBookInFavorites ? 'Remove from Favorites' : 'Add to Favorites'}
-				</button>
-			</div>
+			{modal && <Modal setModal={setModal} modal={modal} book={book} />}
 		</div>
-	);
-};
-
-const Image = ({ imageLinks }) => {
-	return (
-		<>
-			{imageLinks?.thumbnail ? (
-				imageLinks.thumbnail && (
-					<img
-						data-testid="imageid"
-						onClick={() => setModal(true)}
-						className={`h-40 w-36 mx-10 `}
-						src={imageLinks.thumbnail}
-						alt="image of thumbnail"
-						style={modalStyle}
-					/>
-				)
-			) : (
-				<>
-					<img
-						data-testid="imageid"
-						onClick={() => setModal(true)}
-						className={`h-20 w-36 mx-10 `}
-						src={PLACEHOLDER_COVER}
-						alt="image of thumbnail"
-						style={modalStyle}
-					/>
-					<p style={modalStyle}>{title}</p>
-				</>
-			)}
-		</>
 	);
 };
 

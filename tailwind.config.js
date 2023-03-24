@@ -6,6 +6,9 @@ module.exports = {
 		fontFamily: {
 			bookflix: ['netflix-sans', 'sans-serif'],
 		},
+		colors: {
+			green: '#00916E',
+		},
 	},
 	plugins: [],
 };

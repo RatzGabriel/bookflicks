@@ -16,7 +16,10 @@ import TitleCard from './TitleCard';
 const TopBookContainer = ({ topBooks }) => {
 	if (!topBooks.books) return <Shimmer />;
 	return (
-		<div className="pt-24 max-h-50" data-testid="container-title">
+		<div
+			className="pt-24 max-h-50 w-full mx-auto   "
+			data-testid="container-title"
+		>
 			<h1 className={titleClass}>{topBooks.title}</h1>
 			<div className=" md:hidden">
 				<Slider {...topSlider} className=" md:hidden">

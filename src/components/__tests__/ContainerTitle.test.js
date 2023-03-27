@@ -1,3 +1,5 @@
+/* global test */
+
 import { render, waitFor, screen } from '@testing-library/react';
 import { Provider, useSelector } from 'react-redux';
 import { StaticRouter } from 'react-router-dom/server';

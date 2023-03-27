@@ -10,6 +10,7 @@ const booksSlice = createSlice({
 			crime: [],
 		},
 		loading: false,
+		searchValue: '',
 	},
 	reducers: {
 		addBooks: (state, action) => {
@@ -18,8 +19,11 @@ const booksSlice = createSlice({
 		toggleLoading: (state, action) => {
 			state.loading = action.payload;
 		},
+		setSearchValue: (state, action) => {
+			state.searchValue = action.payload;
+		},
 	},
 });
 
-export const { addBooks, toggleLoading } = booksSlice.actions;
+export const { addBooks, toggleLoading, setSearchValue } = booksSlice.actions;
 export default booksSlice.reducer;

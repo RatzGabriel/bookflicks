@@ -15,6 +15,7 @@ import {
 } from '../../utils/favoritesSlice';
 import LandingPageShimmer from './LandingPageShimmer';
 import { loadAllBooks } from './loadAllBooks';
+import ResultContainer from '../../components/ui/ResultContainer';
 
 const Home = () => {
 	const dispatch = useDispatch();
@@ -49,6 +50,7 @@ const Home = () => {
 	return (
 		<div data-testid="homeComponent" className="pt-20 md:pt-0 font-bookflix ">
 			<BigContainer book={all[3]} />
+			<ResultContainer />
 			<ContainerTitle books={fantasy} title={CONTAINER_TITLE_1} />
 			<ContainerTitle books={comedy} title={CONTAINER_TITLE_2} />
 			<ContainerTitle books={all} title={TOP_TITLE_1} row="1" top={true} />

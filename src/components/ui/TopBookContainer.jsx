@@ -29,10 +29,10 @@ function TopBookContainer({ topBooks }) {
           ))}
         </Slider>
       </div>
-      <div className="flex-wrap justify-between hidden md:flex ">
+      <div className=" justify-between hidden md:flex ">
         {topBooks.books.map((book, index) => (
           <div key={book.id + index} className="flex max-h-40">
-            <div className="w-[4.5rem] h-40 md:w-20">{getRank(index)}</div>
+            <div className="w-[10rem] h-40 md:w-40 md:h-56">{getRank(index)}</div>
             <TitleCard book={book} />
           </div>
         ))}

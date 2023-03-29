@@ -24,8 +24,8 @@ function Search() {
   return (
     <input
       type="text"
-      className="text-black"
-      placeholder="Search for Books or categories"
+      className="text-black py-2 px-3 rounded-xl"
+      placeholder="Search for Books "
       {...searchText}
     />
   );

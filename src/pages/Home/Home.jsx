@@ -47,7 +47,6 @@ const Home = () => {
 
   return (
     <div data-testid="homeComponent" className="pt-20 md:pt-0 font-bookflix ">
-      <Shimmer />
       <BigContainer book={all[3]} />
       <ResultContainer />
       <ContainerTitle books={fantasy} title={CONTAINER_TITLE_1} />

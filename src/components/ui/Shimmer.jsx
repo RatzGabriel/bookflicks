@@ -9,6 +9,33 @@ export const Shimmer = () => {
         <SmallShimmer />
         <SmallShimmer />
         <SmallShimmer />
+        <SmallShimmer />
+        <SmallShimmer />
+        <SmallShimmer />
+        <SmallShimmer />
+        <SmallShimmer />
+      </div>
+      <div className="flex w-full flex-wrap justify-between">
+        <SmallShimmer />
+        <SmallShimmer />
+        <SmallShimmer />
+        <SmallShimmer />
+        <SmallShimmer />
+        <SmallShimmer />
+        <SmallShimmer />
+        <SmallShimmer />
+        <SmallShimmer />
+      </div>
+      <div className="flex w-full flex-wrap justify-between">
+        <SmallShimmer />
+        <SmallShimmer />
+        <SmallShimmer />
+        <SmallShimmer />
+        <SmallShimmer />
+        <SmallShimmer />
+        <SmallShimmer />
+        <SmallShimmer />
+        <SmallShimmer />
       </div>
     </div>
   );
@@ -41,7 +68,7 @@ export const GreatShimmer = () => {
 
 const SmallShimmer = () => {
   return (
-    <div className="mt-5 border border-blue-300 shadow rounded-md p-4 max-w-sm w-5/5 mx-auto">
+    <div className="h-60 w-36 mt-5 border border-blue-300 shadow rounded-md p-4 max-w-sm w-5/5 mx-auto">
       <div className="animate-pulse flex space-x-4">
         <div className="rounded-full bg-slate-200 h-10 w-10"></div>
         <div className="flex-1 space-y-6 py-1">

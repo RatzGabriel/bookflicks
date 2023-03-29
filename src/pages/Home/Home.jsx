@@ -14,6 +14,7 @@ import LandingPageShimmer from './LandingPageShimmer';
 import { loadAllBooks } from './loadAllBooks';
 import ResultContainer from '../../components/ui/ResultContainer';
 import { Shimmer } from '../../components/ui/Shimmer';
+import LoadingSpiner from '../../components/ui/LoadingSpiner';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ const Home = () => {
   const fantasy = useSelector((store) => store.books.allBooks.fantasy);
   const comedy = useSelector((store) => store.books.allBooks.comedy);
   const crime = useSelector((store) => store.books.allBooks.crime);
+  const loading = useSelector((store) => store.books.loading);
 
   const getAllBooks = () => {
     const books = useSelector((store) => store.books.allBooks);
@@ -47,6 +49,7 @@ const Home = () => {
 
   return (
     <div data-testid="homeComponent" className="pt-20 md:pt-0 font-bookflix ">
+      {loading && <LoadingSpiner />}
       <BigContainer book={all[3]} />
       <ResultContainer />
       <ContainerTitle books={fantasy} title={CONTAINER_TITLE_1} />

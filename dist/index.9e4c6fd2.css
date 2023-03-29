@@ -330,6 +330,60 @@ img, video {
   transition: background-color .3s ease-out;
 }
 
+.loader-dots div {
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+
+.loader-dots div:nth-child(1) {
+  animation: .6s infinite loader-dots1;
+  left: 8px;
+}
+
+.loader-dots div:nth-child(2) {
+  animation: .6s infinite loader-dots2;
+  left: 8px;
+}
+
+.loader-dots div:nth-child(3) {
+  animation: .6s infinite loader-dots2;
+  left: 32px;
+}
+
+.loader-dots div:nth-child(4) {
+  animation: .6s infinite loader-dots3;
+  left: 56px;
+}
+
+@keyframes loader-dots1 {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes loader-dots3 {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(0);
+  }
+}
+
+@keyframes loader-dots2 {
+  0% {
+    transform: translate(0);
+  }
+
+  100% {
+    transform: translate(24px);
+  }
+}
+
 @media (min-width: 768px) {
   .md\:w-full {
     width: 100% !important;

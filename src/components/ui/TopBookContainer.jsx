@@ -23,7 +23,7 @@ function TopBookContainer({ topBooks }) {
         <Slider {...topSlider} className=" md:hidden">
           {topBooks.books.map((book, index) => (
             <div className=" flex mx-1" key={uid()}>
-              <div className="w-[8.5rem] h-40 md:w-20 ">{getRank(index)}</div>
+              <div className="w-[8.5rem] h-64 md:w-20 ">{getRank(index)}</div>
               <TitleCard book={book} test="test" />
             </div>
           ))}

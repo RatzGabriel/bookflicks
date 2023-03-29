@@ -326,6 +326,10 @@ img, video {
   src: url("NetflixSans-Regular.da021e00.otf");
 }
 
+.btn-favorite {
+  transition: background-color .3s ease-out;
+}
+
 @media (min-width: 768px) {
   .md\:w-full {
     width: 100% !important;

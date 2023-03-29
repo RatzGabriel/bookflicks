@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @font-face {
-	font-family: 'netflix-sans';
-	src: url('./src/assets/fonts/NetflixSans-Regular.otf');
+  font-family: 'netflix-sans';
+  src: url('./src/assets/fonts/NetflixSans-Regular.otf');
+}
+
+.btn-favorite {
+  transition: background-color 0.3s ease-out;
 }

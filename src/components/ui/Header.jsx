@@ -6,7 +6,11 @@ import Menu from './Menu';
 import { useSelector } from 'react-redux';
 import Search from './Search';
 
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { SignIn, SignOut, auth } from '../../utils/firebase/firebase';
+
 const Header = () => {
+  const [user] = useAuthState(auth);
   const location = useLocation();
   const [menu, setMenu] = useState(false);
   const books = useSelector((store) => store.favorites.items);
@@ -38,6 +42,7 @@ const Header = () => {
             >
               Home
             </Link>
+            {user ? <SignOut /> : <SignIn />}
           </div>
           <div className="flex items-center ">
             <Link
@@ -49,7 +54,7 @@ const Header = () => {
               Favorites
             </Link>
             <span className="text-xs mx-3 " data-testid="booklength">
-              {books.length}
+              {books?.length != undefined && books.length}
             </span>
           </div>
         </div>

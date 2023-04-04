@@ -16,6 +16,9 @@ function ContainerTitle({ books, title, isSearchResult, row }) {
   if (top && topBooks !== undefined) {
     return <TopBookContainer topBooks={topBooks} />;
   }
+
+  if (books.length == undefined) return;
+
   return (
     <div className="max-h-50 pt-24 md:" data-testid="container-title">
       <div className="md:hidden">

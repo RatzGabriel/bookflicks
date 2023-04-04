@@ -20,8 +20,7 @@ const Home = () => {
   const dispatch = useDispatch();
 
   const load = async () => {
-    const favoriteFromLocal = await loadFavorites();
-    dispatch(loadFavoritesFromStorage(favoriteFromLocal));
+    loadFavorites();
     dispatch(loadAllBooks(dispatch, getAllBooks));
   };
 

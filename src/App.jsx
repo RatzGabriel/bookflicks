@@ -9,6 +9,8 @@ import store from './utils/store';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Favorites from './pages/Favorites/Favorites';
+import 'firebase/app';
+import 'firebase/auth';
 
 const AppLayout = () => {
   return (

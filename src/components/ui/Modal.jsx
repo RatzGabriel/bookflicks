@@ -8,17 +8,18 @@ import { addToFavorites, removeFromFavorites } from '../../utils/favoritesSlice'
 
 export default function Modal({ modal, setModal, book }) {
   const [animate, setAnimate] = useState(false);
-  console.log(book);
   const cancelButtonRef = useRef(null);
 
   const imagesrc = book.volumeInfo.imageLinks?.smallThumbnail || PLACEHOLDER_COVER;
 
   const shortenText = book?.volumeInfo?.description?.slice(0, 400);
   const favorites = useSelector((store) => store.favorites.items);
-  const isBookInFavorites = favorites.some((fav) => fav.id === book.id);
+  const isBookInFavorites = favorites && Object.values(favorites).some((fav) => fav.id === book.id);
+
   const dispatch = useDispatch();
 
   const addBookHandler = () => {
+    console.log(book);
     if (!isBookInFavorites) {
       dispatch(addToFavorites(book));
       return;
@@ -108,7 +109,7 @@ export default function Modal({ modal, setModal, book }) {
                     } transition-all duration-500 ${
                       animate ? 'animate-pulse' : ''
                     } inline-flex w-full justify-center rounded-md  px-3 py-2 text-sm font-semibold text-white shadow-sm  sm:ml-3 sm:w-auto`}
-                    onClick={() => addBookHandler(false)}
+                    onClick={() => addBookHandler()}
                   >
                     {isBookInFavorites ? 'Remove from Favorites' : 'Add to Favorites'}
                   </button>

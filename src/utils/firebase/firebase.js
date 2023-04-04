@@ -9,8 +9,8 @@ import { getFirestore } from 'firebase/firestore';
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: 'AIzaSyDc0znz2fczV7ChFO5u_3ltIcLmOvgr9QU',
-  authDomain: 'bookflix-4892d.firebaseapp.com',
+  apiKey: `${process.env.firebase_key}`,
+  authDomain: `${process.env.authDomain}`,
   projectId: 'bookflix-4892d',
   storageBucket: 'bookflix-4892d.appspot.com',
   messagingSenderId: '833962837938',

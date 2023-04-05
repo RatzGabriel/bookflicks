@@ -15,6 +15,22 @@ import { loadAllBooks } from './loadAllBooks';
 import ResultContainer from '../../components/ui/ResultContainer';
 import { Shimmer } from '../../components/ui/Shimmer';
 import LoadingSpiner from '../../components/ui/LoadingSpiner';
+import { auth } from '../../utils/firebase/firebase';
+import { setUser } from '../../utils/userSlice';
+
+function checkAuthState(dispatch) {
+  const unsubscribe = auth.onAuthStateChanged((user) => {
+    if (user) {
+      dispatch(setUser(user));
+    } else {
+      // User is signed out
+      dispatch(setUser(null));
+    }
+  });
+
+  // Return a function to unsubscribe when the component unmounts
+  return () => unsubscribe();
+}
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -23,6 +39,10 @@ const Home = () => {
     loadFavorites();
     dispatch(loadAllBooks(dispatch, getAllBooks));
   };
+
+  useEffect(() => {
+    checkAuthState(dispatch);
+  }, [dispatch]);
 
   useEffect(() => {
     load();

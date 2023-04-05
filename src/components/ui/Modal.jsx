@@ -1,4 +1,4 @@
-import { Fragment, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,18 +9,32 @@ import { addToFavorites, removeFromFavorites } from '../../utils/favoritesSlice'
 export default function Modal({ modal, setModal, book }) {
   const [animate, setAnimate] = useState(false);
   const cancelButtonRef = useRef(null);
-
+  const [isFavorite, setIsFavorite] = useState(false);
   const imagesrc = book.volumeInfo.imageLinks?.smallThumbnail || PLACEHOLDER_COVER;
 
   const shortenText = book?.volumeInfo?.description?.slice(0, 400);
   const favorites = useSelector((store) => store.favorites.items);
-  const isBookInFavorites = favorites && Object.values(favorites).some((fav) => fav.id === book.id);
+
+  useEffect(() => {
+    Object.values(favorites).some(
+      (fav) => {
+        console.log(favorites);
+        console.log(fav);
+        console.log(book.id);
+        console.log(fav.id);
+        if (fav.id === book.id) {
+          setIsFavorite(true);
+        }
+      },
+      [favorites],
+    );
+  });
 
   const dispatch = useDispatch();
 
   const addBookHandler = () => {
     console.log(book);
-    if (!isBookInFavorites) {
+    if (!isFavorite) {
       dispatch(addToFavorites(book));
       return;
     }
@@ -105,13 +119,13 @@ export default function Modal({ modal, setModal, book }) {
                   <button
                     type="button"
                     className={`${
-                      isBookInFavorites ? 'bg-red-600' : ' bg-green-600'
+                      isFavorite ? 'bg-red-600' : ' bg-green-600'
                     } transition-all duration-500 ${
                       animate ? 'animate-pulse' : ''
                     } inline-flex w-full justify-center rounded-md  px-3 py-2 text-sm font-semibold text-white shadow-sm  sm:ml-3 sm:w-auto`}
                     onClick={() => addBookHandler()}
                   >
-                    {isBookInFavorites ? 'Remove from Favorites' : 'Add to Favorites'}
+                    {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
                   </button>
                   <button
                     type="button"

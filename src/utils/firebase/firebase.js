@@ -3,6 +3,10 @@ import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
+import { setUser } from '../userSlice';
+import { useDispatch } from 'react-redux';
+import { clearFavorites } from '../favoritesSlice';
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -23,7 +27,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
-function Login() {
+function Login(dispatch) {
   signInWithPopup(auth, provider)
     .then((result) => {
       // This gives you a Google Access Token. You can use it to access the Google API.
@@ -31,6 +35,9 @@ function Login() {
       const token = credential.accessToken;
       // The signed-in user info.
       const user = result.user;
+      console.log('user', user);
+
+      dispatch(setUser(user));
       // ...
     })
     .catch((error) => {
@@ -46,9 +53,15 @@ function Login() {
 }
 
 function SignOut() {
+  const dispatch = useDispatch();
   return (
     auth.currentUser && (
-      <button className="sign-out" onClick={() => auth.signOut()}>
+      <button
+        className="sign-out"
+        onClick={() => {
+          auth.signOut(), dispatch(setUser(null));
+        }}
+      >
         Sign Out
       </button>
     )
@@ -56,8 +69,9 @@ function SignOut() {
 }
 
 function SignIn() {
+  const dispatch = useDispatch();
   return (
-    <button onClick={() => Login()} type="button">
+    <button onClick={() => Login(dispatch)} type="button">
       Login
     </button>
   );

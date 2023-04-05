@@ -23,28 +23,37 @@ const Header = () => {
 
   return (
     <>
-      <div className={'z-50 h-20 flex  md:w-full  top-0 '}>
-        <div className="flex items-center justify-between w-full ">
-          <GiHamburgerMenu onClick={() => toggleMenu()} className=" md:hidden  text-[2em] " />
-          <Link to="/">
-            <img data-testid="logo" className="h-20 " src={BOOKS_LOGO_SRC} alt="logo" />
-          </Link>
-          <Search />
+      <div className={'z-50 h-20 flex  md:w-full  top-0 justify-between '}>
+        <div className="flex flex-col items-center justify-between w-full ">
+          <div className="flex items-center justify-between w-full">
+            <div className="flex items-center">
+              <GiHamburgerMenu onClick={() => toggleMenu()} className=" md:hidden  text-[2em] " />
+              <Link to="/">
+                <img data-testid="logo" className="h-20 " src={BOOKS_LOGO_SRC} alt="logo" />
+              </Link>
+              <div className="w-full hidden md:inline-block">
+                <Search />
+              </div>
+            </div>
+            <div className="md:hidden ">{user ? <SignOut /> : <SignIn />}</div>
+          </div>
+          <div className="w-full md:hidden">
+            <Search />
+          </div>
         </div>
         <div
           data-testid="links"
-          className="  hidden md:flex justify-between items-center w-3/12  text-3xl  "
+          className="  hidden md:flex justify-between items-center w-5/12  text-3xl "
         >
-          <div className="flex items-center ">
+          <div className="flex items-center w-30  ">
             <Link
               className={`${location.pathname === '/' ? 'text-red-400' : ''} px-4  font-bold`}
               to="/"
             >
               Home
             </Link>
-            {user ? <SignOut /> : <SignIn />}
           </div>
-          <div className="flex items-center ">
+          <div className="flex items-center w-40   ">
             <Link
               className={`${
                 location.pathname === '/favorites' ? 'text-red-400' : ''
@@ -57,6 +66,7 @@ const Header = () => {
               {books?.length != undefined && books.length}
             </span>
           </div>
+          {user ? <SignOut /> : <SignIn />}
         </div>
       </div>
       {menu && <Menu setMenu={setMenu} />}

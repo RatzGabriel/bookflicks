@@ -3,6 +3,7 @@ import { PLACEHOLDER_COVER } from '../../utils/constants';
 import Modal from './Modal';
 
 function TitleCard({ book }) {
+  if (book == undefined) return null;
   const [modal, setModal] = useState(false);
   const { title, imageLinks } = book.volumeInfo;
   const imagesrc = imageLinks?.smallThumbnail || PLACEHOLDER_COVER;

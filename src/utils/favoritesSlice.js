@@ -1,8 +1,21 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { doc, collection, onSnapshot, addDoc, deleteDoc, getDoc, setDoc } from 'firebase/firestore';
+import {
+  doc,
+  collection,
+  query,
+  where,
+  onSnapshot,
+  deleteDoc,
+  getDoc,
+  setDoc,
+} from 'firebase/firestore';
 import { db } from './firebase/firestore/firestore';
+import { getAuth, onAuthStateChanged } from 'firebase/auth'; // Import onAuthStateChanged
+import { setUser } from './userSlice';
 
 const favoritesRef = collection(db, 'favorites');
+
+const auth = getAuth();
 
 const updateFavorites = (favorites) => ({
   type: 'favorites/updateFavorites',
@@ -11,19 +24,27 @@ const updateFavorites = (favorites) => ({
 
 export const loadFavorites = createAsyncThunk(
   'favorites/loadFavorites',
-  async (_, { getState, dispatch }) => {
-    console.log('load');
+  async (_, { dispatch }) => {
+    const user = auth.currentUser;
+    console.log(user);
+    if (user.uid == null || user == null) {
+      console.log(user);
+      dispatch(updateFavorites([]));
+    }
+
     try {
-      const q = await collection(db, 'favorites');
+      console.log('try', user.uid);
+      const q = await query(collection(db, 'favorites'), where('userId', '==', user.uid));
+
       return new Promise((resolve) => {
         const unsubscribe = onSnapshot(q, (favoritesSnapshot) => {
           let updatedFavorites = [];
           favoritesSnapshot.forEach((doc) => {
-            console.log(doc.data());
             updatedFavorites.push(doc.data());
           });
-          console.log(updatedFavorites);
+
           // Update state with resolved payload
+          console.log(updatedFavorites);
           dispatch(updateFavorites(updatedFavorites));
           resolve(updatedFavorites);
         });
@@ -36,42 +57,34 @@ export const loadFavorites = createAsyncThunk(
 );
 
 export const addToFavorites = createAsyncThunk('favorites/addToFavorites', async (book) => {
+  const userId = currentUser.uid;
   const docRef = doc(favoritesRef, book.id);
-  console.log(book.id);
   const docSnap = await getDoc(docRef);
   if (!docSnap.exists()) {
-    console.log("Doc doesn't exist, adding it");
     try {
-      await setDoc(docRef, book);
+      await setDoc(docRef, { ...book, userId });
     } catch (error) {
-      console.log(error);
+      throw error;
     }
-    return book;
+    return { ...book, userId };
   }
 });
 
 export const removeFromFavorites = createAsyncThunk(
   'favorites/removeFromFavorites',
   async (book) => {
-    console.log('start removing', book.id, book);
+    const userId = currentUser.uid;
     const docRef = doc(favoritesRef, book.id);
-    console.log(docRef);
     const docSnap = await getDoc(docRef);
-    console.log('docSnap', docSnap);
-    console.log(docSnap);
-    console.log(docSnap.exists());
-
     if (!docSnap.exists()) {
-      console.log("Doc doesn't exist, can't delete it");
       return;
     }
     try {
-      console.log('Removing favorite:', book.id);
       await deleteDoc(docRef);
-      console.log('Removed favorite:', book.id);
+
       return book.id;
     } catch (error) {
-      console.error('Error removing favorite:', error);
+      throw error;
     }
   },
 );
@@ -87,18 +100,15 @@ const favoritesSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(loadFavorites.pending, (state) => {
-        console.log('pending');
         state.loading = true;
         state.error = null;
       })
       .addCase(loadFavorites.fulfilled, (state, action) => {
-        console.log('fulfilled');
         state.loading = false;
-        console.log(action.payload);
+
         state.items = action.payload;
       })
       .addCase(loadFavorites.rejected, (state, action) => {
-        console.log('rejected');
         state.loading = false;
         state.error = action.error.message;
       })
@@ -109,7 +119,14 @@ const favoritesSlice = createSlice({
         state.items = state.items.filter((item) => item.id !== action.payload);
       })
       .addCase(updateFavorites, (state, action) => {
+        console.log('action.payload', action.payload);
         state.items = action.payload;
+      })
+      .addCase(setUser, (state, action) => {
+        if (!action.payload) {
+          // User is signed out
+          state.items = [];
+        }
       });
   },
 });

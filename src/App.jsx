@@ -1,5 +1,5 @@
 import ReactDom from 'react-dom/client';
-import { Provider } from 'react-redux';
+import { Provider, useDispatch } from 'react-redux';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 import Home from './pages/Home/index';
 import Error from './components/ui/Error';
@@ -11,6 +11,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import Favorites from './pages/Favorites/Favorites';
 import 'firebase/app';
 import 'firebase/auth';
+import { auth } from './utils/firebase/firebase';
 
 const AppLayout = () => {
   return (

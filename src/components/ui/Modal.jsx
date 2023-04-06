@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { uid } from 'uid';
 import { PLACEHOLDER_COVER } from '../../utils/constants';
 import { addToFavorites, removeFromFavorites } from '../../utils/favoritesSlice';
+import { log } from 'console';
 
 export default function Modal({ modal, setModal, book }) {
   const [animate, setAnimate] = useState(false);
@@ -16,15 +17,19 @@ export default function Modal({ modal, setModal, book }) {
   const favorites = useSelector((store) => store.favorites.items);
 
   useEffect(() => {
-    Object.values(favorites).some(
-      (fav) => {
-        if (fav.id === book.id) {
-          setIsFavorite(true);
-        }
-      },
-      [favorites],
-    );
-  });
+    console.log(favorites);
+    let favoriteFound = false;
+    Object.values(favorites).forEach((fav) => {
+      if (fav.id === book.id) {
+        console.log(fav.id === book.id);
+        setIsFavorite(true);
+        favoriteFound = true;
+      }
+    });
+    if (!favoriteFound) {
+      setIsFavorite(false);
+    }
+  }, [book.id, favorites, setIsFavorite]);
 
   const dispatch = useDispatch();
 

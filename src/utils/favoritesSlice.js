@@ -12,6 +12,7 @@ import {
 import { db } from './firebase/firestore/firestore';
 import { getAuth, onAuthStateChanged } from 'firebase/auth'; // Import onAuthStateChanged
 import { setUser } from './userSlice';
+import { log } from 'console';
 
 const favoritesRef = collection(db, 'favorites');
 
@@ -32,12 +33,16 @@ export const loadFavorites = createAsyncThunk(
     }
 
     try {
-      const q = await query(collection(db, 'favorites'), where('userId', '==', user.uid));
-
+      const q = await query(collection(db, 'favorites'));
+      //where('userId', '==', user.uid));
+      console.log('user', user);
+      console.log('q', q);
       return new Promise((resolve) => {
         const unsubscribe = onSnapshot(q, (favoritesSnapshot) => {
           let updatedFavorites = [];
+          console.log(favoritesSnapshot);
           favoritesSnapshot.forEach((doc) => {
+            console.log('doc', doc.data());
             updatedFavorites.push(doc.data());
           });
 
@@ -55,9 +60,10 @@ export const loadFavorites = createAsyncThunk(
 );
 
 export const addToFavorites = createAsyncThunk('favorites/addToFavorites', async (book) => {
-  const userId = currentUser.uid;
+  const userId = auth.currentUser.uid;
   const docRef = doc(favoritesRef, book.id);
   const docSnap = await getDoc(docRef);
+
   if (!docSnap.exists()) {
     try {
       await setDoc(docRef, { ...book, userId });
@@ -71,9 +77,12 @@ export const addToFavorites = createAsyncThunk('favorites/addToFavorites', async
 export const removeFromFavorites = createAsyncThunk(
   'favorites/removeFromFavorites',
   async (book) => {
-    const userId = currentUser.uid;
+    const userId = auth.currentUser.uid;
+
     const docRef = doc(favoritesRef, book.id);
+
     const docSnap = await getDoc(docRef);
+
     if (!docSnap.exists()) {
       return;
     }

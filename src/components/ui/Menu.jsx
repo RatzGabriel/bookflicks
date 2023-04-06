@@ -2,8 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { links } from '../../utils/constants';
 import { AiFillCloseCircle } from 'react-icons/ai';
+import { SignIn, SignOut } from '../../utils/firebase/firebase';
 
-const Menu = ({ setMenu }) => {
+const Menu = ({ setMenu, user }) => {
   return (
     <div className="  z-50 border-r-4  text-white  bg-black top-0 fixed w-3/6 left-0 overflow-hidden h-full overflow-x-hidden ">
       <div className=" items-center mx-auto w-4/5 flex mt-6     ">
@@ -18,6 +19,7 @@ const Menu = ({ setMenu }) => {
               </Link>
             );
           })}
+          <div className="py-6 ">{user ? <SignOut /> : <SignIn />}</div>
         </div>
       </div>
     </div>

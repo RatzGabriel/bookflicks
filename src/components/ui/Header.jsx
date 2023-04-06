@@ -31,6 +31,9 @@ const Header = () => {
               <Link to="/">
                 <img data-testid="logo" className="h-20 " src={BOOKS_LOGO_SRC} alt="logo" />
               </Link>
+              <div className="w-3/6 md:hidden">
+                <Search />
+              </div>
               <div className="hidden md:flex">
                 <Link className={`${location.pathname === '/' ? 'text-red-400' : ''} px-4`} to="/">
                   Home
@@ -65,10 +68,6 @@ const Header = () => {
                 </Link>
               </div>
             </div>
-            <div className="md:hidden ">{user ? <SignOut /> : <SignIn />}</div>
-          </div>
-          <div className="w-full md:hidden">
-            <Search />
           </div>
         </div>
         <div
@@ -81,7 +80,7 @@ const Header = () => {
           {user ? <SignOut /> : <SignIn />}
         </div>
       </div>
-      {menu && <Menu setMenu={setMenu} />}
+      {menu && <Menu setMenu={setMenu} user={user} />}
     </>
   );
 };

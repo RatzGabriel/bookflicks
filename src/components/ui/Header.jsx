@@ -52,6 +52,9 @@ const Header = () => {
             >
               Home
             </Link>
+            <Link to="/comedy">comedy</Link>
+            <Link to="/crime">crime</Link>
+            <Link to="/fantasy">fantasy</Link>
           </div>
           <div className="flex items-center w-40   ">
             <Link

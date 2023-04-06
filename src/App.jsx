@@ -12,6 +12,7 @@ import Favorites from './pages/Favorites/Favorites';
 import 'firebase/app';
 import 'firebase/auth';
 import { auth } from './utils/firebase/firebase';
+import CategoryPage from './components/ui/CategoryPage';
 
 const AppLayout = () => {
   return (
@@ -40,6 +41,18 @@ const appRouter = createBrowserRouter([
       {
         path: '/favorites',
         element: <Favorites />,
+      },
+      {
+        path: '/fantasy',
+        element: <CategoryPage categorie={'fantasy'} />,
+      },
+      {
+        path: '/comedy',
+        element: <CategoryPage categorie={'comedy'} />,
+      },
+      {
+        path: '/crime',
+        element: <CategoryPage categorie={'crime'} />,
       },
     ],
   },

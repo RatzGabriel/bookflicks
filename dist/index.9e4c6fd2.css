@@ -474,42 +474,6 @@ img, video {
   }
 }
 
-.login-with-google-btn {
-  color: #757575;
-  background-color: #fff;
-  background-image: url("https://banner2.cleanpng.com/20180521/ers/kisspng-google-logo-5b02bbe1d5c6e0.2384399715269058258756.jpg");
-  background-position: 12px 11px;
-  background-repeat: no-repeat;
-  border: none;
-  border-radius: 3px;
-  padding: 12px 16px 12px 42px;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  transition: background-color .3s, box-shadow .3s;
-  box-shadow: 0 -1px #0000000a, 0 1px 1px #00000040;
-}
-
-.login-with-google-btn:hover {
-  box-shadow: 0 -1px #0000000a, 0 2px 4px #00000040;
-}
-
-.login-with-google-btn:active {
-  background-color: #eee;
-}
-
-.login-with-google-btn:focus {
-  outline: none;
-  box-shadow: 0 -1px #0000000a, 0 2px 4px #00000040, 0 0 0 3px #c8dafc;
-}
-
-.login-with-google-btn:disabled {
-  filter: grayscale();
-  cursor: not-allowed;
-  background-color: #ebebeb;
-  box-shadow: 0 -1px #0000000a, 0 1px 1px #00000040;
-}
-
 .slick-slider {
   box-sizing: border-box;
   -webkit-user-select: none;

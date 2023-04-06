@@ -17,9 +17,9 @@ export default function Modal({ modal, setModal, book }) {
   const favorites = useSelector((store) => store.favorites.items);
 
   useEffect(() => {
-    console.log(favorites);
     let favoriteFound = false;
     Object.values(favorites).forEach((fav) => {
+      console.log(fav);
       if (fav.id === book.id) {
         console.log(fav.id === book.id);
         setIsFavorite(true);

@@ -33,7 +33,7 @@ export const loadFavorites = createAsyncThunk(
     }
 
     try {
-      const q = await query(collection(db, 'favorites'));
+      const q = await query(collection(db, 'favorites'), where('userId', '==', user.uid));
       //where('userId', '==', user.uid));
       console.log('user', user);
       console.log('q', q);
@@ -42,7 +42,6 @@ export const loadFavorites = createAsyncThunk(
           let updatedFavorites = [];
           console.log(favoritesSnapshot);
           favoritesSnapshot.forEach((doc) => {
-            console.log('doc', doc.data());
             updatedFavorites.push(doc.data());
           });
 
@@ -77,25 +76,30 @@ export const addToFavorites = createAsyncThunk('favorites/addToFavorites', async
 export const removeFromFavorites = createAsyncThunk(
   'favorites/removeFromFavorites',
   async (book) => {
-    const userId = auth.currentUser.uid;
-
-    const docRef = doc(favoritesRef, book.id);
-
-    const docSnap = await getDoc(docRef);
-
-    if (!docSnap.exists()) {
-      return;
-    }
     try {
-      await deleteDoc(docRef);
+      const userId = auth.currentUser.uid;
 
-      return book.id;
+      const docRef = doc(favoritesRef, book.id);
+      console.log(docRef);
+      const docSnap = await getDoc(docRef);
+      console.log(docSnap);
+      if (!docSnap.exists()) {
+        return;
+      }
+      try {
+        console.log('try delete');
+        await deleteDoc(docRef);
+
+        return book.id;
+      } catch (error) {
+        console.log(error);
+        throw error;
+      }
     } catch (error) {
-      throw error;
+      console.log(error);
     }
   },
 );
-
 const favoritesSlice = createSlice({
   name: 'favorites',
   initialState: {

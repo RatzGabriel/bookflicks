@@ -9,14 +9,14 @@ import {
 } from '../../utils/constants';
 import BigContainer from '../../components/ui/BigContainer';
 import ContainerTitle from '../../components/ui/ContainerTitle';
-import { loadFavorites, loadFavoritesFromStorage } from '../../utils/favoritesSlice';
+import { loadFavorites } from '../../utils/favoritesSlice';
 import LandingPageShimmer from './LandingPageShimmer';
 import { loadAllBooks } from './loadAllBooks';
 import ResultContainer from '../../components/ui/ResultContainer';
-import { Shimmer } from '../../components/ui/Shimmer';
 import LoadingSpiner from '../../components/ui/LoadingSpiner';
 import { auth } from '../../utils/firebase/firebase';
 import { setUser } from '../../utils/userSlice';
+import { useBooks } from '../../utils/useBooks';
 
 function checkAuthState(dispatch) {
   const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -34,11 +34,7 @@ function checkAuthState(dispatch) {
 
 const Home = () => {
   const dispatch = useDispatch();
-
-  const load = async () => {
-    loadFavorites();
-    dispatch(loadAllBooks(dispatch, getAllBooks));
-  };
+  const { load } = useBooks();
 
   useEffect(() => {
     checkAuthState(dispatch);
@@ -53,11 +49,6 @@ const Home = () => {
   const comedy = useSelector((store) => store.books.allBooks.comedy);
   const crime = useSelector((store) => store.books.allBooks.crime);
   const loading = useSelector((store) => store.books.loading);
-
-  const getAllBooks = () => {
-    const books = useSelector((store) => store.books.allBooks);
-    return books;
-  };
 
   if (all == undefined || all.length == 0)
     return (

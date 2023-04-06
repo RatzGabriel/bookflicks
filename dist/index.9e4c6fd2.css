@@ -252,10 +252,6 @@ img, video {
   margin-left: -.25rem !important;
 }
 
-.mb-2 {
-  margin-bottom: .5rem !important;
-}
-
 .mr-2 {
   margin-right: .5rem !important;
 }
@@ -338,6 +334,11 @@ img, video {
 .py-2\.5 {
   padding-top: .625rem !important;
   padding-bottom: .625rem !important;
+}
+
+.px-10 {
+  padding-left: 2.5rem !important;
+  padding-right: 2.5rem !important;
 }
 
 .text-center {

@@ -31,8 +31,38 @@ const Header = () => {
               <Link to="/">
                 <img data-testid="logo" className="h-20 " src={BOOKS_LOGO_SRC} alt="logo" />
               </Link>
-              <div className="w-full hidden md:inline-block">
-                <Search />
+              <div className="hidden md:flex">
+                <Link className={`${location.pathname === '/' ? 'text-red-400' : ''} px-4`} to="/">
+                  Home
+                </Link>
+                <Link
+                  className={`${location.pathname === '/favorites' ? 'text-red-400' : ''} px-4`}
+                  to="/favorites"
+                >
+                  Favorites
+                  <span className="text-xs mx-1 " data-testid="booklength">
+                    {books?.length != undefined && books.length}
+                  </span>
+                </Link>
+
+                <Link
+                  className={`${location.pathname === '/comedy' ? 'text-red-400' : ''} px-4`}
+                  to="/comedy"
+                >
+                  comedy
+                </Link>
+                <Link
+                  className={`${location.pathname === '/crime' ? 'text-red-400' : ''} px-4`}
+                  to="/crime"
+                >
+                  crime
+                </Link>
+                <Link
+                  className={`${location.pathname === '/fantasy' ? 'text-red-400' : ''} px-4`}
+                  to="/fantasy"
+                >
+                  fantasy
+                </Link>
               </div>
             </div>
             <div className="md:hidden ">{user ? <SignOut /> : <SignIn />}</div>
@@ -43,31 +73,10 @@ const Header = () => {
         </div>
         <div
           data-testid="links"
-          className="  hidden md:flex justify-between items-center w-5/12  text-3xl "
+          className="  hidden md:flex justify-between items-center w-6/12  text-3xl "
         >
-          <div className="flex items-center w-30  ">
-            <Link
-              className={`${location.pathname === '/' ? 'text-red-400' : ''} px-4  font-bold`}
-              to="/"
-            >
-              Home
-            </Link>
-            <Link to="/comedy">comedy</Link>
-            <Link to="/crime">crime</Link>
-            <Link to="/fantasy">fantasy</Link>
-          </div>
-          <div className="flex items-center w-40   ">
-            <Link
-              className={`${
-                location.pathname === '/favorites' ? 'text-red-400' : ''
-              }  text-3xl font-bold`}
-              to="/favorites"
-            >
-              Favorites
-            </Link>
-            <span className="text-xs mx-3 " data-testid="booklength">
-              {books?.length != undefined && books.length}
-            </span>
+          <div className="w-full hidden md:inline-block">
+            <Search />
           </div>
           {user ? <SignOut /> : <SignIn />}
         </div>

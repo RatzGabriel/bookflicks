@@ -29,13 +29,11 @@ const Favorites = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    console.log(user);
     if (user == null) return;
     dispatch(loadFavorites(null, { extra: { user } }));
   }, [user]);
 
   useEffect(() => {
-    console.log(user);
     if (user == null) return;
     dispatch(loadFavorites(null, { extra: { user } }));
   }, []);

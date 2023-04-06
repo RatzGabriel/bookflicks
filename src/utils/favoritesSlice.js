@@ -26,14 +26,12 @@ export const loadFavorites = createAsyncThunk(
   'favorites/loadFavorites',
   async (_, { dispatch }) => {
     const user = auth.currentUser;
-    console.log(user);
+
     if (user.uid == null || user == null) {
-      console.log(user);
       dispatch(updateFavorites([]));
     }
 
     try {
-      console.log('try', user.uid);
       const q = await query(collection(db, 'favorites'), where('userId', '==', user.uid));
 
       return new Promise((resolve) => {
@@ -44,7 +42,7 @@ export const loadFavorites = createAsyncThunk(
           });
 
           // Update state with resolved payload
-          console.log(updatedFavorites);
+
           dispatch(updateFavorites(updatedFavorites));
           resolve(updatedFavorites);
         });
@@ -119,7 +117,6 @@ const favoritesSlice = createSlice({
         state.items = state.items.filter((item) => item.id !== action.payload);
       })
       .addCase(updateFavorites, (state, action) => {
-        console.log('action.payload', action.payload);
         state.items = action.payload;
       })
       .addCase(setUser, (state, action) => {

@@ -14,7 +14,7 @@ const ResultContainer = () => {
       setSearchBooks(allBooks[searchValue]);
     }
   }, [searchValue, allBooks]);
-
+  console.log(searchBooks);
   return (
     searchBooks.length > 0 && (
       <div className="w-full">

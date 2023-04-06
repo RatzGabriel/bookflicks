@@ -8,8 +8,20 @@ export const links = [
     path: '/',
   },
   {
-    name: 'My List',
+    name: 'Favorites',
     path: '/favorites',
+  },
+  {
+    name: 'Crime',
+    path: '/crime',
+  },
+  {
+    name: 'Fantasy',
+    path: '/fantasy',
+  },
+  {
+    name: 'Comedy',
+    path: '/comedy',
   },
 ];
 

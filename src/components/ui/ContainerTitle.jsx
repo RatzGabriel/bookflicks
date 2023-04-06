@@ -27,7 +27,7 @@ function ContainerTitle({ books, title, isSearchResult, row }) {
           className={` max-h-60 md:hidden ${isSearchResult && 'w-72'}  `}
           {...(isSearchResult ? searchSlide : settingsSlide)}
         >
-          {books && books.map((book) => <TitleCard book={book} />)}
+          {books && books.map((book) => <TitleCard key={book.id} book={book} />)}
         </Slider>
       </div>
 
@@ -37,7 +37,7 @@ function ContainerTitle({ books, title, isSearchResult, row }) {
           <div className="mt-1 grid grid-cols-1 gap-y-5 gap-x-6 sm:grid-cols-2 lg:grid-cols-9 xl:gap-x-8">
             {books &&
               books.map((book, index) => {
-                if (index < 16) return <TitleCard book={book} />;
+                if (index < 16) return <TitleCard key={book.id} book={book} />;
               })}
           </div>
         </div>

@@ -1,6 +1,7 @@
 import { addBooks, toggleLoading } from './booksSlice';
 
 const getBooks = async (genre, dispatch, books) => {
+  console.log(genre);
   if (books[genre] != undefined && books[genre].length > 0) {
     return books[genre];
   }

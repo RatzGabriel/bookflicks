@@ -23,10 +23,10 @@ const Header = () => {
 
   return (
     <>
-      <div className={'z-50 h-20 flex  md:w-full  top-0 justify-between mx-auto w-4/5  '}>
+      <div className={'z-50 h-20 flex  md:w-full  top-0 justify-between   '}>
         <div className="flex flex-col items-center justify-between  w-full ">
           <div className="flex items-center justify-between w-full ">
-            <div className="flex items-center justify-around w-full h-20 ">
+            <div className="flex items-center justify-around w-full h-20  ">
               <GiHamburgerMenu
                 onClick={() => toggleMenu()}
                 className=" md:hidden inline-block  text-[2em] "
@@ -80,12 +80,12 @@ const Header = () => {
         </div>
         <div
           data-testid="links"
-          className="  hidden md:flex justify-between items-center w-6/12  text-3xl "
+          className="  md:inline-block hidden justify-between items-center w-6/12   "
         >
-          <div className="w-full hidden md:inline-block">
+          <div className="w-full flex text-2xl items-center ">
             <Search />
+            {user ? <SignOut /> : <SignIn />}
           </div>
-          {user ? <SignOut /> : <SignIn />}
         </div>
       </div>
       {menu && <Menu setMenu={setMenu} user={user} />}

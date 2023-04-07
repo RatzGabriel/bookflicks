@@ -23,15 +23,14 @@ const Header = () => {
 
   return (
     <>
-      <div
-        className={
-          'z-50 h-20 flex  md:w-full  top-0 justify-between mx-auto w-4/5 border border-white '
-        }
-      >
+      <div className={'z-50 h-20 flex  md:w-full  top-0 justify-between mx-auto w-4/5  '}>
         <div className="flex flex-col items-center justify-between  w-full ">
           <div className="flex items-center justify-between w-full ">
             <div className="flex items-center justify-around w-full h-20 ">
-              <GiHamburgerMenu onClick={() => toggleMenu()} className=" md:hidden  text-[2em] " />
+              <GiHamburgerMenu
+                onClick={() => toggleMenu()}
+                className=" md:hidden inline-block  text-[2em] "
+              />
               <Link to="/">
                 <img
                   data-testid="logo"
@@ -40,10 +39,10 @@ const Header = () => {
                   alt="logo"
                 />
               </Link>
-              <div className=" md:hidden">
+              <div className="inline-block md:hidden">
                 <Search />
               </div>
-              <div className="hidden md:flex">
+              <div className="hidden md:inline-block  ">
                 <Link className={`${location.pathname === '/' ? 'text-red-400' : ''} px-4`} to="/">
                   Home
                 </Link>

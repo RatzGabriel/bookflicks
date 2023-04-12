@@ -42,7 +42,7 @@ const Home = () => {
 
   useEffect(() => {
     load();
-  }, []);
+  }, [dispatch]);
 
   const all = useSelector((store) => store.books.allBooks.all);
   const fantasy = useSelector((store) => store.books.allBooks.fantasy);
@@ -71,4 +71,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default React.memo(Home);

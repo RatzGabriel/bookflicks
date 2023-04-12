@@ -31,61 +31,66 @@ const Header = () => {
                 onClick={() => toggleMenu()}
                 className=" md:hidden inline-block  text-[2em] "
               />
-              <Link to="/">
-                <img
-                  data-testid="logo"
-                  className="h-20 hidden md:inline-block "
-                  src={BOOKS_LOGO_SRC}
-                  alt="logo"
-                />
-              </Link>
+              <div>
+                <Link to="/">
+                  <img
+                    data-testid="logo"
+                    className="h-20 hidden md:inline-block "
+                    src={BOOKS_LOGO_SRC}
+                    alt="logo"
+                  />
+                </Link>
+                <div className="hidden md:inline-block  ">
+                  <Link
+                    className={`${location.pathname === '/' ? 'text-red-400' : ''} px-4`}
+                    to="/"
+                  >
+                    Home
+                  </Link>
+                  <Link
+                    className={`${location.pathname === '/favorites' ? 'text-red-400' : ''} px-4`}
+                    to="/favorites"
+                  >
+                    Favorites
+                    <span className="text-xs mx-1 " data-testid="booklength">
+                      {books?.length != undefined && books.length}
+                    </span>
+                  </Link>
+
+                  <Link
+                    className={`${location.pathname === '/comedy' ? 'text-red-400' : ''} px-4`}
+                    to="/comedy"
+                  >
+                    comedy
+                  </Link>
+                  <Link
+                    className={`${location.pathname === '/crime' ? 'text-red-400' : ''} px-4`}
+                    to="/crime"
+                  >
+                    crime
+                  </Link>
+                  <Link
+                    className={`${location.pathname === '/fantasy' ? 'text-red-400' : ''} px-4`}
+                    to="/fantasy"
+                  >
+                    fantasy
+                  </Link>
+                </div>
+              </div>
               <div className="inline-block md:hidden">
                 <Search />
-              </div>
-              <div className="hidden md:inline-block  ">
-                <Link className={`${location.pathname === '/' ? 'text-red-400' : ''} px-4`} to="/">
-                  Home
-                </Link>
-                <Link
-                  className={`${location.pathname === '/favorites' ? 'text-red-400' : ''} px-4`}
-                  to="/favorites"
-                >
-                  Favorites
-                  <span className="text-xs mx-1 " data-testid="booklength">
-                    {books?.length != undefined && books.length}
-                  </span>
-                </Link>
-
-                <Link
-                  className={`${location.pathname === '/comedy' ? 'text-red-400' : ''} px-4`}
-                  to="/comedy"
-                >
-                  comedy
-                </Link>
-                <Link
-                  className={`${location.pathname === '/crime' ? 'text-red-400' : ''} px-4`}
-                  to="/crime"
-                >
-                  crime
-                </Link>
-                <Link
-                  className={`${location.pathname === '/fantasy' ? 'text-red-400' : ''} px-4`}
-                  to="/fantasy"
-                >
-                  fantasy
-                </Link>
               </div>
             </div>
           </div>
         </div>
         <div
           data-testid="links"
-          className="  md:inline-block hidden justify-between items-center w-6/12   "
+          className="  md:flex hidden justify-between items-center w-6/12   "
         >
-          <div className="w-full flex text-2xl items-center ">
+          <div className=" flex text-2xl items-center justify-around ">
             <Search />
-            {user ? <SignOut /> : <SignIn />}
           </div>
+          {user ? <SignOut /> : <SignIn />}
         </div>
       </div>
       {menu && <Menu setMenu={setMenu} user={user} />}

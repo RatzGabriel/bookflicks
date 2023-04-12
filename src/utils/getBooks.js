@@ -26,7 +26,6 @@ const getBooks = async (genre, dispatch, books) => {
     dispatch(toggleLoading(false));
   } catch (error) {
     if (error) {
-      alert('error:', error);
       dispatch(toggleLoading(false));
       return error;
     }

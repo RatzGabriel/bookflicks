@@ -16,8 +16,8 @@ import CategoryPage from './components/ui/CategoryPage';
 
 const AppLayout = () => {
   return (
-    <div className="bg-black text-white w-full ">
-      <div className="mx-auto w-4/5 min-h-screen">
+    <div className="bg-black text-white  min-h-screen ">
+      <div className=" mx-auto  w-4/6">
         <Provider store={store}>
           <Header />
           <Outlet />

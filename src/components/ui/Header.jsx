@@ -23,7 +23,7 @@ const Header = () => {
 
   return (
     <>
-      <div className={'z-50 h-20 flex  md:w-full  top-0 justify-between   '}>
+      <div className={'z-50 h-20 flex  md:w-4/5 mx-auto  top-0 justify-between   '}>
         <div className="flex flex-col items-center justify-between  w-full ">
           <div className="flex items-center justify-between w-full ">
             <div className="flex items-center justify-around w-full h-20  ">
@@ -31,7 +31,7 @@ const Header = () => {
                 onClick={() => toggleMenu()}
                 className=" md:hidden inline-block  text-[2em] "
               />
-              <div>
+              <div className="flex items-center">
                 <Link to="/">
                   <img
                     data-testid="logo"
@@ -87,7 +87,7 @@ const Header = () => {
           data-testid="links"
           className="  md:flex hidden justify-between items-center w-6/12   "
         >
-          <div className=" flex text-2xl items-center justify-around ">
+          <div className=" flex text-2xl items-center justify-between w-[100%]   ">
             <Search />
           </div>
           {user ? <SignOut /> : <SignIn />}

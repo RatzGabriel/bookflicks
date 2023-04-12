@@ -19,7 +19,9 @@ export default function Modal({ modal, setModal, book }) {
   useEffect(() => {
     let favoriteFound = false;
     Object.values(favorites).forEach((fav) => {
-      console.log(fav);
+      console.log(favorites);
+      if (fav === undefined) return;
+      if (fav.id == undefined) return;
       if (fav.id === book.id) {
         console.log(fav.id === book.id);
         setIsFavorite(true);
@@ -34,6 +36,7 @@ export default function Modal({ modal, setModal, book }) {
   const dispatch = useDispatch();
 
   const addBookHandler = () => {
+    if (book.id === undefined) return;
     if (!isFavorite) {
       dispatch(addToFavorites(book));
       return;

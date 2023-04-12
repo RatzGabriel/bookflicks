@@ -21,8 +21,8 @@ function BigContainer() {
             </Link>
           </div>
         </div>
-        <div className="w-full md:w-2/4 ">
-          <img src={LANDINGPAGE_IMAGE} className="w-full mx-auto mt-6 sm:w-[70%] " />
+        <div className=" w-2/4 ">
+          <img src={LANDINGPAGE_IMAGE} className=" mx-auto mt-6  " />
         </div>
       </section>
     </div>

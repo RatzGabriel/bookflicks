@@ -17,13 +17,13 @@ import CategoryPage from './components/ui/CategoryPage';
 const AppLayout = () => {
   return (
     <div className="bg-black text-white  min-h-screen ">
-      <div className=" mx-auto  w-4/6">
-        <Provider store={store}>
-          <Header />
+      <Provider store={store}>
+        <Header />
+        <div className=" mx-auto  w-4/6">
           <Outlet />
           <Footer />
-        </Provider>
-      </div>
+        </div>
+      </Provider>
     </div>
   );
 };
